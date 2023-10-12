@@ -11,12 +11,28 @@ const handlerIncidentsSearch = async (req, res) => {
   };
 
   try {
-    console.log('Cuerpo de la solicitud api search:', req.body);
+    // console.log('Cuerpo de la solicitud api search:', req.body);
 
-    const response = await axios.post(`${url}/rest/api/3/search`, req.body, { headers });
+    const issueIdList = (await axios.post(`${url}/rest/api/3/search`, req.body, { headers })).data.issues;
 
-    console.log('Respuesta del servidor de Atlassian:', response.data);
-    res.json(response.data);
+    const issueIds = issueIdList.map((issue) => issue.id)
+
+    const issueList = await Promise.all(
+      issueIds.map(async (issueId) => {
+        try {
+          const response = await axios.get(`${url}/rest/api/3/issue/${issueId}`, { headers });
+          return response.data;
+        } catch (error) {
+          console.error(`Error en la solicitud de detalles para la incidencia ${issueId}:`, error);
+          throw error; // Esto hará que Promise.all falle si hay un error en alguna de las solicitudes.
+        }
+      })
+    );
+
+    console.log('issueList', issueList)
+
+    // console.log('Respuesta del servidor de Atlassian:', issueIdList.data);
+    res.json(issueList);
 
   } catch (error) {
     console.error('Error en la solicitud:', error);
