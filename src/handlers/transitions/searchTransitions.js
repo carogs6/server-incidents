@@ -11,7 +11,7 @@ const searchTransitions = async (req, res) => {
   const  key = req.params;
 
   try {
-    console.log('data', data)
+    console.log('key Search', key)
     const transitions = (await axios.get(`${url}/rest/api/2/issue/${key}/transitions` , { headers })).data.transitions;
     console.log('transitions', transitions)
 
