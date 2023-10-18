@@ -32,10 +32,10 @@ const handlerIncidentsSearch = async (req, res) => {
     res.json(issueList);
 
   } catch (error) {
-    console.error('Error en la solicitud:', error);
+    console.error('Error en la solicitud handlerIncidentsSearch:', error);
 
     if (error.response) {
-      console.error('Detalles del error:', error.response.data);
+      console.error('Detalles del error en handlerIncidentsSearch:', error.response.data);
     }
 
     res.status(error.response ? error.response.status : 500).json({ error: error.response ? error.response.data : 'Error en la solicitud' });
