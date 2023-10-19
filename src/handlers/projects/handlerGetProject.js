@@ -11,23 +11,21 @@ const handlerGetProject = async (req, res) => {
   };
 
   try {
-    console.log('hi')
     const allProjects = (await axios.get(`${url}/rest/api/3/project`, { headers })).data
 
     const validProjects = allProjects.filter((project) => project.projectCategory.name == "notificacionesIncidencias")
-    console.log('validProjects', validProjects)
     
     res.json(validProjects);
     return validProjects
 
   } catch (error) {
-    console.error('Error en la solicitud:', error);
+    console.error('Error en la solicitud handlerGetProject:', error);
 
     if (error.response) {
-      console.error('Detalles del error:', error.response.data);
+      console.error('Detalles del error en handlerGetProject:', error.response.data);
     }
 
-    res.status(error.response ? error.response.status : 500).json({ error: error.response ? error.response.data : 'Error en la solicitud' });
+    res.status(error.response ? error.response.status : 500).json({ error: error.response ? error.response.data : 'Error en la solicitud handlerGetProject' });
   }
 
 }

@@ -16,22 +16,26 @@ const handlerDoTransition = async (req, res) => {
   const { id, list } = data
 
   try {
+    console.log('id', id);
+    console.log('list', list)
     const responseTransitions = (await axios.get(`${url}/rest/api/2/issue/${id}/transitions` , { headers })).data;
-    const transitions = response.transitions
+    const transitions = responseTransitions.transitions
+    console.log('transitions name', transitions)
 
     const transitionName = transitions.find((transition) => transition.name == list);
 
-    console.log('transitionName', transitionName)
+    const idTransition = transitionName
+    console.log('idTransition', idTransition)
 
     const bodyData = {
       "transition": {
-        "id": transitionName.id
+        "id": idTransition
       }
     }
 
     const response = await axios.post(`${url}/rest/api/3/issue/${id}/transitions`, bodyData, {headers});
 
-    console.log('Respuesta del servidor de Atlassian:', response.data);
+    console.log('Respuesta del servidor de Atlassian en handlerDoTransition:', response.data);
     res.json(response.data);
 
   } catch (error) {
