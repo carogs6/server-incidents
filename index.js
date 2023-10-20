@@ -1,9 +1,3 @@
-// const server = require('./src/app.js');
-
-//   server.listen(3001, () => {
-//     console.log('%s listening at 3001'); // eslint-disable-line no-console
-//   });
-///////////////////////////////////////////
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan')

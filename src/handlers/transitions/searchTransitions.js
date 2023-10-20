@@ -13,14 +13,11 @@ const searchTransitions = async (req, res) => {
   const  data = req.params;
 
   try {
-    const key = data.key
-
-    console.log('key', key)
+    const key = data.key;
 
 
-    const response = await axios.get(`${url}/rest/api/2/issue/${key}/transitions` , { headers })
-    console.log('transitions searchTransitions', response)
-    console.log('Respuesta del servidor de Atlassian en searchTransitions:', response.data);
+    const response = await axios.get(`${url}/rest/api/2/issue/${key}/transitions` , { headers });
+
     res.json(response.data);
 
   } catch (error) {

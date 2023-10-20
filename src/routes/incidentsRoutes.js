@@ -5,7 +5,7 @@ const handlerNewIncident = require('../handlers/incidents/handlerNewIncident');
 
 const router = Router();
 
-router.post('/search', handlerIncidentsSearch);
+router.get('/search/:key', handlerIncidentsSearch);
 
 router.post('/api/notify-incident', handlerNewIncident);
 

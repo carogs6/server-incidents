@@ -13,19 +13,16 @@ const handlerDoTransition = async (req, res) => {
 
   const  data = req.body;
 
-  const { id, list } = data
+  const { id, list } = data;
 
   try {
-    console.log('id', id);
-    console.log('list', list)
+
     const responseTransitions = (await axios.get(`${url}/rest/api/2/issue/${id}/transitions` , { headers })).data;
-    const transitions = responseTransitions.transitions
-    console.log('transitions name', transitions)
+    const transitions = responseTransitions.transitions;
 
     const transitionName = transitions.find((transition) => transition.name == list);
 
-    const idTransition = transitionName
-    console.log('idTransition', idTransition)
+    const idTransition = transitionName.id;
 
     const bodyData = {
       "transition": {
