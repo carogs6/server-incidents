@@ -26,6 +26,7 @@ const handlerBoardSearch = async (req, res) => {
 
     res.status(error.response ? error.response.status : 500).json({ error: error.response ? error.response.data : 'Error en la solicitud' });
   }
+
 };
 
 module.exports = handlerBoardSearch;

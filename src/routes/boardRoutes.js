@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const handlerBoardSearch = require("../handlers/board/handlerBoardSearch")
 
 const router = Router();
 
